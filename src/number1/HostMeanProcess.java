@@ -1,4 +1,4 @@
-package hostmean;
+package number1;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -14,7 +14,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public class HostMeanProcess {
 
@@ -59,9 +58,12 @@ public class HostMeanProcess {
 
     public void run(String inputPath, String outputPath) throws Exception {
         // handles "path already exist" exception.
-        FileUtils.cleanDirectory(new File(outputPath));
-        FileUtils.deleteDirectory(new File(outputPath));
-
+        try {
+            FileUtils.cleanDirectory(new File(outputPath));
+            FileUtils.deleteDirectory(new File(outputPath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Configuration conf = new Configuration();
 
         Job job = Job.getInstance(conf, "Host Mean");
@@ -78,7 +80,7 @@ public class HostMeanProcess {
         FileInputFormat.addInputPath(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.waitForCompletion(true);
 
     }
 }

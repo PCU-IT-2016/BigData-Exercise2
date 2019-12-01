@@ -1,6 +1,5 @@
-package neighbourhoodcount;
+package number2;
 
-import hostmean.HostMeanProcess;
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -15,7 +14,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 public class NCProcess {
     public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
@@ -76,7 +74,7 @@ public class NCProcess {
         FileInputFormat.addInputPath(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
 
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.waitForCompletion(true);
 
     }
 }

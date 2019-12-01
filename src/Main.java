@@ -1,27 +1,25 @@
-import java.io.IOException;
-import java.util.StringTokenizer;
-
-import hostmean.HostMeanProcess;
-import neighbourhoodcount.NCProcess;
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.NullWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import number1.HostMeanProcess;
+import number2.NCProcess;
+import number5.Number5Process;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-//        HostMeanProcess hostMeanProcess = new HostMeanProcess();
-//        hostMeanProcess.run("input/airbnb", "output/hostmean");
+        // Host Mean
+        HostMeanProcess hostMeanProcess = new HostMeanProcess();
+        hostMeanProcess.run("input/airbnb", "output/number1");
 
+        // Neighbourhood Count
         NCProcess ncProcess = new NCProcess();
-        ncProcess.run("input/airbnb", "output/neighbourhoodcount");
+        ncProcess.run("input/airbnb", "output/number2");
+
+        // mean price & max price & min price groupby roomtype.
+
+        // mean Minimum night groupby room_type & host_id
+
+        // Max House Count per host_id on Each Neighbourhood.
+        Number5Process number5Process = new Number5Process();
+        number5Process.run("input/airbnb", "output/number5");
     }
 
 }
