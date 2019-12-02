@@ -1,0 +1,24 @@
+Dengan menggunakan airbnb.csv carilah beberapa data berikut. Buatlah dengan menggunakan Hadoop MapReduce.
+
+1. Carilah harga rata - rata tiap host_id
+2. Hitunglah (Count) Neightbourhood yang ada! 
+	Contoh:
+	Woodlands,<count>
+	Bukit Timah,<count>
+	...
+3. Carilah rata - rata harga beserta harga tertinggi dan harga terendah dilihat dari room_type
+4. Carilah rata - rata minimun_night dilihat dari room_type dan host_id
+5. Carilah pemilik rumah terbanyak (host_id) disetiap neightbourhood
+
+Mapper Output
+Woodland,Francesca:1
+Woodland,Francesca:1
+Woodland,...:1
+Woodland,Ammarudin:1
+
+Reducer 
+key: Woodland
+values: Francesca:1
+	Francesca:1
+	...:1
+	Ammarudin:1

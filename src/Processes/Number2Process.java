@@ -1,4 +1,4 @@
-package number1;
+package number2;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -15,27 +15,21 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.File;
 import java.io.IOException;
 
-public class HostMeanProcess {
-
+public class NCProcess {
     public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 
-        private IntWritable priceIntWritable;
-        private Text hostId = new Text();
+        private IntWritable one = new IntWritable(1);
+        private Text neighbourhoodText = new Text();
 
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 
             String regex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
             String[] lineValues = value.toString().split(regex);
 
-            if (lineValues.length == 16) {
-                String hostId = lineValues[2];
-                this.hostId.set(hostId);
+                String neighbourhood = lineValues[5];
+                this.neighbourhoodText.set(neighbourhood);
 
-                String priceInString = lineValues[9];
-                this.priceIntWritable = new IntWritable(Integer.valueOf(priceInString));
-
-                context.write(this.hostId, this.priceIntWritable);
-            }
+                context.write(this.neighbourhoodText, this.one);
         }
     }
 
@@ -45,13 +39,10 @@ public class HostMeanProcess {
 
         public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             int sum = 0;
-            int len = 0;
             for (IntWritable val : values) {
                 sum += val.get();
-                len += 1;
             }
-            float mean = sum / len;
-            result.set(key + "," + String.valueOf(mean));
+            result.set(key + "," + String.valueOf(sum));
             context.write(result, out);
         }
     }
@@ -64,14 +55,15 @@ public class HostMeanProcess {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Configuration conf = new Configuration();
 
-        Job job = Job.getInstance(conf, "Host Mean");
+        Job job = Job.getInstance(conf, "Neighbourhood Count");
 
-        job.setJarByClass(HostMeanProcess.class);
+        job.setJarByClass(NCProcess.class);
 
-        job.setMapperClass(HostMeanProcess.TokenizerMapper.class);
-        job.setReducerClass(SumMeanReducer.class);
+        job.setMapperClass(NCProcess.TokenizerMapper.class);
+        job.setReducerClass(NCProcess.SumMeanReducer.class);
 
         // MAPPER KEY & VALUE CLASS
         job.setOutputKeyClass(Text.class);

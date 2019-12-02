@@ -1,6 +1,8 @@
 package number5;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -17,6 +19,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Number5Process {
+
+    static Log log = LogFactory.getLog(TokenizerMapper.class);
+
     public static class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
 
         private IntWritable one = new IntWritable(1);
@@ -27,15 +32,18 @@ public class Number5Process {
 
             String regex = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
             String[] lineValues = value.toString().split(regex);
-
-            if (lineValues.length == 16) {
-                String neighbourhood = lineValues[5];
-                this.key.set(neighbourhood);
-
-                // value = ",HostId:1"
-                this.value.set(lineValues[2] + ":1");
-                context.write(this.key, this.value);
+            String neighbourhood = "";
+            try {
+                neighbourhood = lineValues[5];
+            } catch (Exception e) {
+                log.info(lineValues[0]);
+                return;
             }
+            this.key.set(neighbourhood);
+
+            // value = ",HostId:1"
+            this.value.set(lineValues[2] + ":1");
+            context.write(this.key, this.value);
         }
     }
 
