@@ -1,4 +1,4 @@
-package number1;
+package Processes;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -15,7 +15,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.File;
 import java.io.IOException;
 
-public class HostMeanProcess {
+public class Number1Process {
 
     public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 
@@ -66,9 +66,9 @@ public class HostMeanProcess {
 
         Job job = Job.getInstance(conf, "Host Mean");
 
-        job.setJarByClass(HostMeanProcess.class);
+        job.setJarByClass(Number1Process.class);
 
-        job.setMapperClass(HostMeanProcess.TokenizerMapper.class);
+        job.setMapperClass(Number1Process.TokenizerMapper.class);
         job.setReducerClass(SumMeanReducer.class);
 
         // MAPPER KEY & VALUE CLASS

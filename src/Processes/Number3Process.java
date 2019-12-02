@@ -1,6 +1,6 @@
-package number3;
+package Processes;
 
-import number5.Number5Process;
+import Processes.Entity.AirbnbRecord;
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -15,28 +15,49 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class Number3Process {
-    public static class TokenizerMapper extends Mapper<Object, Text, Text, Text> {
-
-        private IntWritable one = new IntWritable(1);
+    public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
         private Text key = new Text();
-        private Text value = new Text();
+        private IntWritable value = new IntWritable();
 
         public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
+            AirbnbRecord record = new AirbnbRecord();
+            record.decode(value.toString());
 
+            this.key.set(record.getRoomType());
+            this.value.set(record.getPrice());
 
             context.write(this.key, this.value);
         }
     }
 
-    public static class RoomTypePriceReducer extends Reducer<Text,Text,Text,NullWritable> {
+    public static class RoomTypePriceReducer extends Reducer<Text,IntWritable,Text,NullWritable> {
         private Text result = new Text();
         private NullWritable out = NullWritable.get();
 
-        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+        public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
+            String roomType = key.toString();
 
+            float maxPrice = Float.NEGATIVE_INFINITY;
+            float minPrice = Float.POSITIVE_INFINITY;
+            int totalPrice = 0;
+            int count = 0;
+
+            for (IntWritable value : values) {
+                int price = value.get();
+                totalPrice += price;
+                if (price > maxPrice) {
+                    maxPrice = price;
+                }
+                if (price < minPrice) {
+                    minPrice = price;
+                }
+                count += 1;
+            }
+            float mean = totalPrice / count;
+            this.result.set(roomType + "," + String.valueOf(mean) + ","
+                    + String.valueOf(maxPrice) + "," + String.valueOf(minPrice));
 
             context.write(this.result, this.out);
         }
@@ -62,7 +83,7 @@ public class Number3Process {
 
         // MAPPER KEY & VALUE CLASS
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
 
         FileInputFormat.addInputPath(job, new Path(inputPath));
         FileOutputFormat.setOutputPath(job, new Path(outputPath));

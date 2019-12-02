@@ -1,4 +1,4 @@
-package number2;
+package Processes;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -15,7 +15,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import java.io.File;
 import java.io.IOException;
 
-public class NCProcess {
+public class Number2Process {
     public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 
         private IntWritable one = new IntWritable(1);
@@ -60,10 +60,10 @@ public class NCProcess {
 
         Job job = Job.getInstance(conf, "Neighbourhood Count");
 
-        job.setJarByClass(NCProcess.class);
+        job.setJarByClass(Number2Process.class);
 
-        job.setMapperClass(NCProcess.TokenizerMapper.class);
-        job.setReducerClass(NCProcess.SumMeanReducer.class);
+        job.setMapperClass(Number2Process.TokenizerMapper.class);
+        job.setReducerClass(Number2Process.SumMeanReducer.class);
 
         // MAPPER KEY & VALUE CLASS
         job.setOutputKeyClass(Text.class);

@@ -1,3 +1,5 @@
+package Processes.Entity;
+
 public class AirbnbRecord implements Resource {
 
     int id;
@@ -162,8 +164,10 @@ public class AirbnbRecord implements Resource {
         this.setPrice(Integer.parseInt(lineValues[9]));
         this.setMinimumNights(Integer.parseInt(lineValues[10]));
         this.setNumberOfReviews(Integer.parseInt(lineValues[11]));
-        this.setLastReviews(lineValues[12]);
-        this.setReviewsPerMonth(Float.parseFloat(lineValues[13]));
+        if (lineValues[12] != "")
+            this.setLastReviews(lineValues[12]);
+        if (lineValues!= null && lineValues[13].length() > 0)
+            this.setReviewsPerMonth(Float.parseFloat(lineValues[13]));
         this.setCalculatedHostListingsCount(Integer.parseInt(lineValues[14]));
         this.setAvailability365(Integer.parseInt(lineValues[15]));
     }
