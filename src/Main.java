@@ -1,19 +1,22 @@
-import number1.HostMeanProcess;
-import number2.NCProcess;
-import number5.Number5Process;
+import Processes.Number1Process;
+import Processes.Number2Process;
+import Processes.Number3Process;
+import Processes.Number5Process;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         // Host Mean
-        HostMeanProcess hostMeanProcess = new HostMeanProcess();
+        Number1Process hostMeanProcess = new Number1Process();
         hostMeanProcess.run("input/airbnb", "output/number1");
 
         // Neighbourhood Count
-        NCProcess ncProcess = new NCProcess();
+        Number2Process ncProcess = new Number2Process();
         ncProcess.run("input/airbnb", "output/number2");
 
         // mean price & max price & min price groupby roomtype.
+        Number3Process number3Process = new Number3Process();
+        number3Process.run("input/airbnb", "output/number3");
 
         // mean Minimum night groupby room_type & host_id
 
