@@ -1,7 +1,4 @@
-import Processes.Number1Process;
-import Processes.Number2Process;
-import Processes.Number3Process;
-import Processes.Number5Process;
+import Processes.*;
 
 public class Main {
 
@@ -19,6 +16,8 @@ public class Main {
         number3Process.run("input/airbnb", "output/number3");
 
         // mean Minimum night groupby room_type & host_id
+        Number4Process number4Process = new Number4Process();
+        number4Process.run("input/airbnb", "output/number4");
 
         // Max House Count per host_id on Each Neighbourhood.
         Number5Process number5Process = new Number5Process();
