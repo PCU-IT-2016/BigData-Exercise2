@@ -10,21 +10,21 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/httpfs" />
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/mapreduce" />
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/yarn" />
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/common" />
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/hdfs" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/httpfs" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/mapreduce" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/yarn" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/common" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/hdfs" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/common/jdiff" />
-          <root url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/hdfs/jdiff" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/common/jdiff" />
+          <root url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/hdfs/jdiff" />
         </SOURCES>
-        <jarDirectory url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/common" recursive="false" />
-        <jarDirectory url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/hdfs" recursive="false" />
-        <jarDirectory url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/mapreduce" recursive="false" />
-        <jarDirectory url="file://G:/Kuliah/hadoop-2.7.1/share/hadoop/yarn" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/common" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/hdfs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/mapreduce" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../hadoop-2.7.1/share/hadoop/yarn" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
@@ -47,7 +47,7 @@
         <jarDirectory url="file://D:/Program Files/hadoop-2.7.1/share/hadoop/yarn" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="file://D:/Program Files/hadoop-2.7.1/share/hadoop/common/lib" />
@@ -60,6 +60,32 @@
         <jarDirectory url="file://D:/Program Files/hadoop-2.7.1/share/hadoop/common/lib" recursive="false" />
         <jarDirectory url="file://D:/Program Files/hadoop-2.7.1/share/hadoop/common/lib" recursive="false" type="SOURCES" />
         <jarDirectory url="file://D:/Program Files/hadoop-2.7.1/share/hadoop/common/sources" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../apache commons io/commons-io-2.6-tests.jar!/" />
+          <root url="jar://$MODULE_DIR$/../apache commons io/commons-io-2.6.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/../apache commons io/commons-io-2.6-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../apache commons io/commons-io-2.6-sources.jar!/" />
+          <root url="jar://$MODULE_DIR$/../apache commons io/commons-io-2.6-test-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../commons-logging-1.2-bin/commons-logging-1.2/commons-logging-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/../commons-logging-1.2-bin/commons-logging-1.2/commons-logging-1.2-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
